@@ -1,0 +1,10 @@
+node_modules/
+src/
+.github/
+.git/
+.env
+.env.example
+*.md
+tsconfig.json
+.gitignore
+.azure/

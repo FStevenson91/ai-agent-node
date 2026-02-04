@@ -11,8 +11,7 @@ dist/
 .azure/
 
 # Personal notes
-NOTES.md
-AZURE.NOTES.md
+notes/
 
 # OS files
 .DS_Store

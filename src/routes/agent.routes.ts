@@ -1,4 +1,3 @@
-// src/routes/agent.routes.ts
 import { Router } from "express";
 import { agentController } from "../controllers/agent.controller";
 

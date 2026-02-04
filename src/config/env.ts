@@ -1,11 +1,10 @@
-// src/config/env.ts
 import dotenv from "dotenv";
 import { z } from "zod";
 
 // Cargar variables de entorno
 dotenv.config();
 
-// Schema de validación con Zod (esto es PRO - valida tus env vars)
+// Schema de validación con Zod
 const envSchema = z.object({
   PORT: z.string().default("3000"),
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),

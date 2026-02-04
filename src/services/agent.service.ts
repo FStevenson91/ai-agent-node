@@ -1,4 +1,3 @@
-// src/services/agent.service.ts
 import { ChatRequest, ChatResponse, SessionState } from "../types/agent.types";
 import { randomUUID } from "node:crypto";
 import { groq } from "../config/groq";
@@ -43,7 +42,7 @@ export class AgentService {
       timestamp: new Date().toISOString(),
     });
 
-    // --- AQUÍ LA LLAMADA A LA IA ---
+    // AQUÍ LA LLAMADA A LA IA
     const reply = await this.generateResponse(request.message, session);
     
     // Guardar respuesta en historial

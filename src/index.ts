@@ -1,4 +1,3 @@
-// src/index.ts
 import express, { Application, Request, Response, NextFunction } from "express";
 import { env } from "./config/env";
 import agentRoutes from "./routes/agent.routes";

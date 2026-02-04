@@ -1,5 +1,5 @@
-// src/types/agent.types.ts
-// las interfaces definen los tipos de datos usados en el agente AI y son clas
+// las interfaces definen los tipos de datos usados en el agente AI, y sirven para definir y validar las estructuras de datos.
+
 // Request para chatear con el agente
 export interface ChatRequest {
   message: string;

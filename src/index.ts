@@ -20,7 +20,7 @@ app.use("/api/agent", agentRoutes);
 // Health check
 app.get("/health", (req: Request, res: Response) => {
   res.json({ 
-    status: "ok", 
+    status: "okay!", 
     timestamp: new Date().toISOString(),
     environment: env.NODE_ENV
   });

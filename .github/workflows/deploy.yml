@@ -30,18 +30,19 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Deploy to Azure App Service
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'ai-agent-felipe'
-          package: .
-
-      - name: Set environment variables
+      - name: Disable Azure build
         uses: azure/appservice-settings@v1
         with:
           app-name: 'ai-agent-felipe'
           app-settings-json: |
             [
+              { "name": "SCM_DO_BUILD_DURING_DEPLOYMENT", "value": "false" },
               { "name": "GROQ_API_KEY", "value": "${{ secrets.GROQ_API_KEY }}" },
               { "name": "NODE_ENV", "value": "production" }
             ]
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'ai-agent-felipe'
+          package: .

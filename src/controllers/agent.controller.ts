@@ -3,7 +3,6 @@ import { agentService } from "../services/agent.service";
 import { ChatRequest } from "../types/agent.types";
 import { z } from "zod";
 
-// Validación de request con Zod
 const chatRequestSchema = z.object({
   message: z.string().min(1, "Message is required"),
   sessionId: z.string().optional(),
@@ -11,11 +10,8 @@ const chatRequestSchema = z.object({
 });
 
 export class AgentController {
-
-  // POST /api/agent/chat
   async chat(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      // Validar request
       const validationResult = chatRequestSchema.safeParse(req.body);
       
       if (!validationResult.success) {
@@ -35,7 +31,6 @@ export class AgentController {
     }
   }
 
-  // GET /api/agent/session/:sessionId
   async getSession(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const { sessionId } = req.params;
@@ -52,7 +47,6 @@ export class AgentController {
     }
   }
 
-  // GET /api/agent/sessions (debug)
   async getAllSessions(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const sessions = agentService.getAllSessions();
@@ -62,7 +56,6 @@ export class AgentController {
     }
   }
 
- // DELETE /api/agent/session/:sessionId
 async deleteSession(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const { sessionId } = req.params;

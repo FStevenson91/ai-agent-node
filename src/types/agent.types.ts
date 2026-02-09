@@ -1,13 +1,8 @@
-// las interfaces definen los tipos de datos usados en el agente AI, y sirven para definir y validar las estructuras de datos.
-
-// Request para chatear con el agente
 export interface ChatRequest {
   message: string;
   sessionId?: string;
   context?: Record<string, unknown>;
 }
-
-// Respuesta del agente
 export interface ChatResponse {
   reply: string;
   sessionId: string;
@@ -18,8 +13,6 @@ export interface ChatResponse {
     processingTime: number;
   };
 }
-
-// Estado de una sesión (memoria del agente)
 export interface SessionState {
   sessionId: string;
   history: Array<{
@@ -31,8 +24,6 @@ export interface SessionState {
   createdAt: string;
   updatedAt: string;
 }
-
-// Configuración de un Tool (herramienta del agente)
 export interface AgentTool {
   name: string;
   description: string;

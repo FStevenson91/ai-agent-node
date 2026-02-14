@@ -1,6 +1,11 @@
 import express, { Application, Request, Response, NextFunction } from "express";
 import { env } from "./config/env";
 import agentRoutes from "./routes/agent.routes";
+import { ApolloServer } from "@apollo/server";
+import { expressMiddleware } from "@as-integrations/express4";
+import { typeDefs } from "./graphql/schema.js";
+import { resolvers } from "./graphql/resolvers.js";
+import cors from "cors";
 
 const app: Application = express();
 
@@ -30,11 +35,31 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   });
 });
 
-app.listen(Number(env.PORT), () => {
-  console.log(`
-  🚀 AI Agent Server running!
-  
-  Environment: ${env.NODE_ENV}
-  Port: ${env.PORT}
-  `);
-});
+
+async function startServer() {
+  // Crear Apollo Server
+  const apolloServer = new ApolloServer({
+    typeDefs,
+    resolvers,
+  });
+
+  // Iniciar Apollo Server (requiere await)
+  await apolloServer.start();
+
+  // Agregar endpoint / graphql a Express
+  app.use("/graphql", cors(), express.json(), expressMiddleware(apolloServer));
+
+  app.listen(Number(env.PORT), () => {
+    console.log(`
+    🚀 AI Agent Server running!
+    
+    Environment: ${env.NODE_ENV}
+    Port: ${env.PORT}
+
+    REST:    http://localhost:${env.PORT}/api/agent
+    GraphQL: http://localhost:${env.PORT}/graphql
+    `);
+  });
+}
+
+startServer().catch(console.error);
